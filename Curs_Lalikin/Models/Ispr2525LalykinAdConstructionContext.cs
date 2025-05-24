@@ -90,7 +90,7 @@ public partial class Ispr2525LalykinAdConstructionContext : DbContext
                 .HasColumnName("project_name");
             entity.Property(e => e.StartDate).HasColumnName("start_date");
             entity.Property(e => e.Status)
-                .HasColumnType("enum('планирование','в процессе','завершено','на удержании')")
+                .HasColumnType("enum('Планирование','В процессе','Завершено','На удержании')")
                 .HasColumnName("status");
         });
 

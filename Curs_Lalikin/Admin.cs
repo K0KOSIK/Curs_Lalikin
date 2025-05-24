@@ -417,7 +417,7 @@ namespace Curs_Lalikin
                         ProjectName = "",
                         StartDate = DateOnly.FromDateTime(DateTime.Now),
                         EndDate = DateOnly.FromDateTime(DateTime.Now),
-                        Budget = 0,
+                        Budget = 0m,
                         Status = "",
                     };
                     this.Hide();

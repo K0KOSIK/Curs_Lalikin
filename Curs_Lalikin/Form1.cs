@@ -13,7 +13,15 @@ namespace Curs_Lalikin
             this.ControlBox = false;
             this.DoubleBuffered = true;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            this.textBox2.KeyDown += TextBox2_KeyDown;
         }
+
+        private void TextBox2_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) 
+                button1.PerformClick();
+        }
+
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();

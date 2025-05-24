@@ -45,6 +45,7 @@
             data_entry2 = new TextBox();
             input = new Label();
             data_entry = new TextBox();
+            cmbStatus = new DomainUpDown();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -77,6 +78,7 @@
             // panel1
             // 
             panel1.BackColor = Color.Peru;
+            panel1.Controls.Add(cmbStatus);
             panel1.Controls.Add(dateTimePicker2);
             panel1.Controls.Add(dateTimePicker1);
             panel1.Controls.Add(input6);
@@ -210,6 +212,13 @@
             data_entry.Size = new Size(148, 23);
             data_entry.TabIndex = 0;
             // 
+            // cmbStatus
+            // 
+            cmbStatus.Location = new Point(25, 323);
+            cmbStatus.Name = "cmbStatus";
+            cmbStatus.Size = new Size(148, 23);
+            cmbStatus.TabIndex = 14;
+            // 
             // Change
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -247,5 +256,6 @@
         private Label input6;
         private DateTimePicker dateTimePicker1;
         private DateTimePicker dateTimePicker2;
+        private DomainUpDown cmbStatus;
     }
 }

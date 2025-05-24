@@ -86,6 +86,19 @@ namespace Curs_Lalikin
             data_entry6.DataBindings.Add("Text", Projects, nameof(Projects.Status));
             data_entry3.Visible = false;
             data_entry4.Visible = false;
+            data_entry6.Visible = false;
+            input.Text = "ProjectId";
+            input2.Text = "ProjectName";
+            input3.Text = "StartDate";
+            input4.Text = "EndDate";
+            input5.Text = "Budget";
+            input6.Text = "Status";
+            List<string> Status = new List<string>
+            {
+            "Планирование", "В процессе", "Завершено", "На удержании",
+            };
+            cmbStatus.Items.Clear();
+            cmbStatus.Items.AddRange(Status);
         }
         private void BindMaterials(Material Materials)
         {
@@ -149,8 +162,12 @@ namespace Curs_Lalikin
                     Project.ProjectName = data_entry2.Text;
                     Project.StartDate = DateOnly.FromDateTime(dateTimePicker1.Value);
                     Project.EndDate = DateOnly.FromDateTime(dateTimePicker2.Value);
-                    Project.Budget = Convert.ToInt32(data_entry5.Text);
-                    Project.Status = data_entry6.Text;
+                    Project.Budget = decimal.Parse(
+                    data_entry5.Text.Trim().Replace(',', '.'),
+                    System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.InvariantCulture
+                    );
+                    Project.Status = cmbStatus.Text;
                     Ispr2525LalykinAdConstructionContext context = new();
                     if (isEdit == IsEdit.Y)
                         context.Update(Project);
