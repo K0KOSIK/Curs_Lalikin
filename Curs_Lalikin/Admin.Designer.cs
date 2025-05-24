@@ -165,6 +165,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(636, 35);
             panel2.TabIndex = 2;
+            panel2.MouseDown += panelTop_MouseDown;
             // 
             // bt_min
             // 
@@ -205,6 +206,7 @@
             Controls.Add(panel2);
             Controls.Add(dataGridView1);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "Admin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Admin";

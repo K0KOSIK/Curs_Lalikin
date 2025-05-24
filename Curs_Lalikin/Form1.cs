@@ -1,6 +1,7 @@
 using Curs_Lalikin.Models;
 using System.Diagnostics.Metrics;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Curs_Lalikin
 {
@@ -27,7 +28,7 @@ namespace Curs_Lalikin
             Application.Exit();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             try
             {
@@ -37,17 +38,19 @@ namespace Curs_Lalikin
                     .FirstOrDefault();
                 if (user.Role == "Администратор")
                 {
-                    MessageBox.Show(user.Role);
-                    //Avtoris_role.Text = user.Role;
-                    //await Task.Delay(1500);
+                    //MessageBox.Show(user.Role);
+                    Avtoris_role.Text = user.Role;
+                    Avtoris_role.ForeColor = Color.ForestGreen;
+                    await Task.Delay(1500);
                     Admin form2 = new Admin(this);
                     form2.Show();
                 }
                 if (user.Role == "Пользователь")
                 {
-                    MessageBox.Show(user.Role);
-                    //Avtoris_role.Text = user.Role;
-                    //await Task.Delay(1500);
+                    //MessageBox.Show(user.Role);
+                    Avtoris_role.Text = user.Role;
+                    Avtoris_role.ForeColor = Color.ForestGreen;
+                    await Task.Delay(1500);
                     Users form3 = new Users(this);
                     form3.Show();
                 }
@@ -57,7 +60,9 @@ namespace Curs_Lalikin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Неправильный логин или пароль:");
+                //MessageBox.Show("Неправильный логин или пароль:");
+                Avtoris_role.Text = "Неправильный логин или пароль";
+                Avtoris_role.ForeColor = Color.IndianRed;
                 textBox1.Text = "";
                 textBox2.Text = "";
             }
@@ -89,9 +94,16 @@ namespace Curs_Lalikin
         {
             Application.Exit();
         }
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+        private void panelTop_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
     }
-
-
 }
 
     
