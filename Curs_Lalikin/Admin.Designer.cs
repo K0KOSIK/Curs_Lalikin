@@ -56,9 +56,10 @@
             panel1.Controls.Add(project_materials);
             panel1.Controls.Add(materials);
             panel1.Controls.Add(project);
-            panel1.Location = new Point(2, 0);
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(165, 447);
+            panel1.Size = new Size(165, 450);
             panel1.TabIndex = 0;
             // 
             // bt_add
@@ -149,31 +150,33 @@
             // 
             dataGridView1.BackgroundColor = Color.Tan;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(164, 29);
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(165, 35);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(636, 415);
+            dataGridView1.Size = new Size(635, 415);
             dataGridView1.TabIndex = 1;
             // 
             // panel2
             // 
-            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             panel2.BackColor = Color.Peru;
             panel2.Controls.Add(bt_min);
             panel2.Controls.Add(bt_max);
             panel2.Controls.Add(bt_exit);
-            panel2.Location = new Point(164, 0);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(165, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(636, 35);
+            panel2.Size = new Size(635, 35);
             panel2.TabIndex = 2;
             panel2.MouseDown += panelTop_MouseDown;
             // 
             // bt_min
             // 
             bt_min.BackColor = Color.LightSeaGreen;
-            bt_min.Location = new Point(541, 3);
+            bt_min.Dock = DockStyle.Right;
+            bt_min.Location = new Point(530, 0);
             bt_min.Name = "bt_min";
-            bt_min.Size = new Size(28, 23);
+            bt_min.Size = new Size(35, 35);
             bt_min.TabIndex = 8;
             bt_min.UseVisualStyleBackColor = false;
             bt_min.Click += bt_min_Click_1;
@@ -181,9 +184,10 @@
             // bt_max
             // 
             bt_max.BackColor = Color.Olive;
-            bt_max.Location = new Point(575, 3);
+            bt_max.Dock = DockStyle.Right;
+            bt_max.Location = new Point(565, 0);
             bt_max.Name = "bt_max";
-            bt_max.Size = new Size(25, 23);
+            bt_max.Size = new Size(35, 35);
             bt_max.TabIndex = 7;
             bt_max.UseVisualStyleBackColor = false;
             bt_max.Click += bt_max_Click;
@@ -191,9 +195,10 @@
             // bt_exit
             // 
             bt_exit.BackColor = Color.SaddleBrown;
-            bt_exit.Location = new Point(606, 3);
+            bt_exit.Dock = DockStyle.Right;
+            bt_exit.Location = new Point(600, 0);
             bt_exit.Name = "bt_exit";
-            bt_exit.Size = new Size(27, 23);
+            bt_exit.Size = new Size(35, 35);
             bt_exit.TabIndex = 6;
             bt_exit.UseVisualStyleBackColor = false;
             bt_exit.Click += bt_exit_Click_1;
@@ -204,8 +209,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Tan;
             ClientSize = new Size(800, 450);
-            Controls.Add(panel2);
             Controls.Add(dataGridView1);
+            Controls.Add(panel2);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Admin";

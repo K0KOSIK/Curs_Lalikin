@@ -98,9 +98,10 @@
             panel1.Controls.Add(data_entry2);
             panel1.Controls.Add(input);
             panel1.Controls.Add(data_entry);
-            panel1.Location = new Point(3, 2);
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(244, 449);
+            panel1.Size = new Size(244, 450);
             panel1.TabIndex = 2;
             // 
             // cmbStatus
@@ -231,17 +232,19 @@
             panel2.Controls.Add(bt_min);
             panel2.Controls.Add(bt_max);
             panel2.Controls.Add(bt_exit);
-            panel2.Location = new Point(703, 2);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(244, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(96, 32);
+            panel2.Size = new Size(556, 35);
             panel2.TabIndex = 3;
             // 
             // bt_min
             // 
             bt_min.BackColor = Color.LightSeaGreen;
-            bt_min.Location = new Point(5, 3);
+            bt_min.Dock = DockStyle.Right;
+            bt_min.Location = new Point(451, 0);
             bt_min.Name = "bt_min";
-            bt_min.Size = new Size(25, 23);
+            bt_min.Size = new Size(35, 35);
             bt_min.TabIndex = 11;
             bt_min.UseVisualStyleBackColor = false;
             bt_min.Click += bt_min_Click;
@@ -249,9 +252,10 @@
             // bt_max
             // 
             bt_max.BackColor = Color.Olive;
-            bt_max.Location = new Point(36, 3);
+            bt_max.Dock = DockStyle.Right;
+            bt_max.Location = new Point(486, 0);
             bt_max.Name = "bt_max";
-            bt_max.Size = new Size(25, 23);
+            bt_max.Size = new Size(35, 35);
             bt_max.TabIndex = 10;
             bt_max.UseVisualStyleBackColor = false;
             bt_max.Click += bt_max_Click;
@@ -259,9 +263,10 @@
             // bt_exit
             // 
             bt_exit.BackColor = Color.SaddleBrown;
-            bt_exit.Location = new Point(67, 3);
+            bt_exit.Dock = DockStyle.Right;
+            bt_exit.Location = new Point(521, 0);
             bt_exit.Name = "bt_exit";
-            bt_exit.Size = new Size(27, 23);
+            bt_exit.Size = new Size(35, 35);
             bt_exit.TabIndex = 9;
             bt_exit.UseVisualStyleBackColor = false;
             bt_exit.Click += bt_exit_Click;

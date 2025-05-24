@@ -45,6 +45,7 @@
             // 
             // Avtorisation_label
             // 
+            Avtorisation_label.Anchor = AnchorStyles.Top;
             Avtorisation_label.AutoSize = true;
             Avtorisation_label.Font = new Font("Bauhaus 93", 21.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             Avtorisation_label.ForeColor = Color.White;
@@ -56,6 +57,7 @@
             // 
             // Avtorisation_label2
             // 
+            Avtorisation_label2.Anchor = AnchorStyles.Top;
             Avtorisation_label2.AutoSize = true;
             Avtorisation_label2.Font = new Font("Bauhaus 93", 21.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             Avtorisation_label2.ForeColor = SystemColors.ButtonHighlight;
@@ -67,20 +69,25 @@
             // 
             // textBox1
             // 
+            textBox1.Anchor = AnchorStyles.Top;
             textBox1.Location = new Point(301, 174);
+            textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(151, 23);
             textBox1.TabIndex = 2;
             // 
             // textBox2
             // 
+            textBox2.Anchor = AnchorStyles.Top;
             textBox2.Location = new Point(301, 234);
+            textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(151, 23);
             textBox2.TabIndex = 3;
             // 
             // button1
             // 
+            button1.Anchor = AnchorStyles.Top;
             button1.BackColor = Color.Silver;
             button1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
             button1.ForeColor = Color.White;
@@ -94,6 +101,7 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label1.ForeColor = SystemColors.ButtonHighlight;
@@ -105,6 +113,7 @@
             // 
             // label2
             // 
+            label2.Anchor = AnchorStyles.Top;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
             label2.ForeColor = SystemColors.ButtonHighlight;
@@ -116,52 +125,53 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = Color.Peru;
             panel1.Controls.Add(bt_min);
             panel1.Controls.Add(bt_max);
             panel1.Controls.Add(bt_exit);
-            panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(800, 24);
+            panel1.Size = new Size(800, 35);
             panel1.TabIndex = 7;
             panel1.MouseDown += panelTop_MouseDown;
             // 
             // bt_min
             // 
-            bt_min.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_min.BackColor = Color.LightSeaGreen;
-            bt_min.Location = new Point(704, 0);
+            bt_min.Dock = DockStyle.Right;
+            bt_min.Location = new Point(695, 0);
             bt_min.Name = "bt_min";
-            bt_min.Size = new Size(28, 23);
+            bt_min.Size = new Size(35, 35);
             bt_min.TabIndex = 2;
             bt_min.UseVisualStyleBackColor = false;
             bt_min.Click += bt_min_Click;
             // 
             // bt_max
             // 
-            bt_max.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_max.BackColor = Color.Olive;
-            bt_max.Location = new Point(738, 0);
+            bt_max.Dock = DockStyle.Right;
+            bt_max.Location = new Point(730, 0);
             bt_max.Name = "bt_max";
-            bt_max.Size = new Size(25, 23);
+            bt_max.Size = new Size(35, 35);
             bt_max.TabIndex = 1;
             bt_max.UseVisualStyleBackColor = false;
             bt_max.Click += bt_max_Click;
             // 
             // bt_exit
             // 
-            bt_exit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_exit.BackColor = Color.SaddleBrown;
-            bt_exit.Location = new Point(769, 0);
+            bt_exit.Dock = DockStyle.Right;
+            bt_exit.Location = new Point(765, 0);
             bt_exit.Name = "bt_exit";
-            bt_exit.Size = new Size(27, 23);
+            bt_exit.Size = new Size(35, 35);
             bt_exit.TabIndex = 0;
             bt_exit.UseVisualStyleBackColor = false;
             bt_exit.Click += bt_exit_Click;
             // 
             // Avtoris_role
             // 
+            Avtoris_role.Anchor = AnchorStyles.Top;
             Avtoris_role.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic);
             Avtoris_role.ForeColor = Color.ForestGreen;
             Avtoris_role.Location = new Point(301, 262);
