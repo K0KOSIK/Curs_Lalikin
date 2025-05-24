@@ -61,10 +61,17 @@ namespace Curs_Lalikin
         private void project_materials_Click(object sender, EventArgs e)
         {
             Ispr2525LalykinAdConstructionContext context = new();
-            dataGridView1.DataSource = context.ProjectMaterials.ToList();
+            var data = context.ProjectMaterials
+                .Include(pm => pm.Project)
+                .Include(pm => pm.Material)
+                .Select(pm => new
+                {
+                    ProjectName = pm.Project.ProjectName,
+                    MaterialName = pm.Material.MaterialName,
+                    pm.Quantity
+                }).ToList();
+            dataGridView1.DataSource = data;
             activeEntity = ActiveEntity.ProjectMaterials;
-            dataGridView1.Columns[3].Visible = false;
-            dataGridView1.Columns[4].Visible = false;
         }
 
         private void Categories_Click(object sender, EventArgs e)

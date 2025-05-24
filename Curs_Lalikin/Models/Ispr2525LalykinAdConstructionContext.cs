@@ -111,12 +111,10 @@ public partial class Ispr2525LalykinAdConstructionContext : DbContext
 
             entity.HasOne(d => d.Material).WithMany(p => p.ProjectMaterials)
                 .HasForeignKey(d => d.MaterialId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("project_materials_ibfk_2");
 
             entity.HasOne(d => d.Project).WithMany(p => p.ProjectMaterials)
                 .HasForeignKey(d => d.ProjectId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("project_materials_ibfk_1");
         });
 

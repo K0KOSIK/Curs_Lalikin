@@ -158,6 +158,7 @@ namespace Curs_Lalikin
 
         private void save_Click(object sender, EventArgs e)
         {
+            int QuanityCol;
             switch (x)
             {
                 case ActiveEntity.Projects:
@@ -190,7 +191,7 @@ namespace Curs_Lalikin
                     System.Globalization.CultureInfo.InvariantCulture
                     );
                     Ispr2525LalykinAdConstructionContext context5 = new();
-                    int QuanityCol = context5.Categories.Count();
+                    QuanityCol = context5.Categories.Count();
                     if (Convert.ToInt32(data_entry5.Text) > QuanityCol || Convert.ToInt32(data_entry5.Text) < 0)
                     {
                         MessageBox.Show("CategoriesIdCategories не может быть меньше нуля или больше:" + QuanityCol);
@@ -212,8 +213,25 @@ namespace Curs_Lalikin
                     break;
                 case ActiveEntity.ProjectMaterials:
                     ProjectMaterial ProjectMaterial = new();
-                    ProjectMaterial.ProjectId = Convert.ToInt32(data_entry.Text); ;
-                    ProjectMaterial.MaterialId = Convert.ToInt32(data_entry2.Text);
+                    Ispr2525LalykinAdConstructionContext context6 = new();
+                    QuanityCol = context6.Projects.Count();
+                    if (Convert.ToInt32(data_entry.Text) > QuanityCol || Convert.ToInt32(data_entry.Text) < 0)
+                    {
+                        MessageBox.Show("ProjectId не может быть меньше нуля или больше:" + QuanityCol);
+                        isError = IsError.Y;
+                        break;
+                    }
+                    else
+                        ProjectMaterial.ProjectId = Convert.ToInt32(data_entry.Text);
+                    QuanityCol = context6.Materials.Count();
+                    if (Convert.ToInt32(data_entry2.Text) > QuanityCol || Convert.ToInt32(data_entry2.Text) < 0)
+                    {
+                        MessageBox.Show("MaterialId не может быть меньше нуля или больше:" + QuanityCol);
+                        isError = IsError.Y;
+                        break;
+                    }
+                    else
+                        ProjectMaterial.MaterialId = Convert.ToInt32(data_entry2.Text);
                     ProjectMaterial.Quantity = decimal.Parse(
                     data_entry3.Text.Trim().Replace(',', '.'),
                     System.Globalization.NumberStyles.Any,
