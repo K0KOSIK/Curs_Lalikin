@@ -70,7 +70,6 @@ public partial class Ispr2525LalykinAdConstructionContext : DbContext
 
             entity.HasOne(d => d.CategoriesIdCategoriesNavigation).WithMany(p => p.Materials)
                 .HasForeignKey(d => d.CategoriesIdCategories)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_materials_Categories1");
         });
 

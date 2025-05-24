@@ -31,6 +31,7 @@
             cancellation = new Button();
             save = new Button();
             panel1 = new Panel();
+            cmbStatus = new DomainUpDown();
             dateTimePicker2 = new DateTimePicker();
             dateTimePicker1 = new DateTimePicker();
             input6 = new Label();
@@ -45,7 +46,6 @@
             data_entry2 = new TextBox();
             input = new Label();
             data_entry = new TextBox();
-            cmbStatus = new DomainUpDown();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -97,6 +97,13 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(244, 449);
             panel1.TabIndex = 2;
+            // 
+            // cmbStatus
+            // 
+            cmbStatus.Location = new Point(25, 323);
+            cmbStatus.Name = "cmbStatus";
+            cmbStatus.Size = new Size(148, 23);
+            cmbStatus.TabIndex = 14;
             // 
             // dateTimePicker2
             // 
@@ -212,13 +219,6 @@
             data_entry.Size = new Size(148, 23);
             data_entry.TabIndex = 0;
             // 
-            // cmbStatus
-            // 
-            cmbStatus.Location = new Point(25, 323);
-            cmbStatus.Name = "cmbStatus";
-            cmbStatus.Size = new Size(148, 23);
-            cmbStatus.TabIndex = 14;
-            // 
             // Change
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -228,7 +228,9 @@
             Controls.Add(panel1);
             Controls.Add(save);
             Controls.Add(cancellation);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "Change";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Change";
             Load += Change_Load;
             MouseDown += panel1_MouseDown;

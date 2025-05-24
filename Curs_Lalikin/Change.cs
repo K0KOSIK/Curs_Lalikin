@@ -70,9 +70,6 @@ namespace Curs_Lalikin
                 case ActiveEntity.Categories:
                     BindCategories((Category)entityData);
                     break;
-
-
-                    // Добавьте другие сущности по аналогии MonitoringDatum monitoringDatum
             }
         }
 
@@ -111,6 +108,12 @@ namespace Curs_Lalikin
             dateTimePicker2.Visible = false;
             data_entry6.Visible = false;
             input6.Visible = false;
+            cmbStatus.Visible = false;
+            input.Text = "MaterialId";
+            input2.Text = "MaterialName";
+            input3.Text = "UnitOfMeasure";
+            input4.Text = "UnitPrice";
+            input5.Text = "CategoriesIdCategories";
         }
         private void BindProjectMaterials(ProjectMaterial ProjectMaterials)
         {
@@ -125,7 +128,10 @@ namespace Curs_Lalikin
             input4.Visible = false;
             input5.Visible = false;
             input6.Visible = false;
-
+            cmbStatus.Visible = false;
+            input.Text = "ProjectId";
+            input2.Text = "MaterialId";
+            input3.Text = "Quantity";
         }
         private void BindCategories(Category Categories)
         {
@@ -141,12 +147,10 @@ namespace Curs_Lalikin
             input4.Visible = false;
             input5.Visible = false;
             input6.Visible = false;
+            cmbStatus.Visible = false;
+            input.Text = "IdCategories";
+            input2.Text = "CategoriesName";
         }
-
-
-
-
-
         private void Change_Load(object sender, EventArgs e)
         {
 
@@ -180,8 +184,21 @@ namespace Curs_Lalikin
                     Material.MaterialId = Convert.ToInt32(data_entry.Text);
                     Material.MaterialName = data_entry2.Text;
                     Material.UnitOfMeasure = data_entry3.Text;
-                    Material.UnitPrice = Convert.ToInt32(data_entry4.Text);
-                    Material.CategoriesIdCategories = Convert.ToInt32(data_entry5.Text);
+                    Material.UnitPrice = decimal.Parse(
+                    data_entry4.Text.Trim().Replace(',', '.'),
+                    System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.InvariantCulture
+                    );
+                    Ispr2525LalykinAdConstructionContext context5 = new();
+                    int QuanityCol = context5.Categories.Count();
+                    if (Convert.ToInt32(data_entry5.Text) > QuanityCol || Convert.ToInt32(data_entry5.Text) < 0)
+                    {
+                        MessageBox.Show("CategoriesIdCategories не может быть меньше нуля или больше:" + QuanityCol);
+                        isError = IsError.Y;
+                        break;
+                    }
+                    else
+                        Material.CategoriesIdCategories = Convert.ToInt32(data_entry5.Text);
                     Ispr2525LalykinAdConstructionContext context2 = new();
                     if (isEdit == IsEdit.Y)
                     {
@@ -197,7 +214,11 @@ namespace Curs_Lalikin
                     ProjectMaterial ProjectMaterial = new();
                     ProjectMaterial.ProjectId = Convert.ToInt32(data_entry.Text); ;
                     ProjectMaterial.MaterialId = Convert.ToInt32(data_entry2.Text);
-                    ProjectMaterial.Quantity = Convert.ToInt32(data_entry3.Text);
+                    ProjectMaterial.Quantity = decimal.Parse(
+                    data_entry3.Text.Trim().Replace(',', '.'),
+                    System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.InvariantCulture
+                    );
                     Ispr2525LalykinAdConstructionContext context3 = new();
                     if (isEdit == IsEdit.Y)
                         context3.Update(ProjectMaterial);

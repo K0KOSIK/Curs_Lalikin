@@ -18,7 +18,7 @@ namespace Curs_Lalikin
 
         private void TextBox2_KeyDown(object? sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) 
+            if (e.KeyCode == Keys.Enter)
                 button1.PerformClick();
         }
 
@@ -83,6 +83,11 @@ namespace Curs_Lalikin
         private void bt_min_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void Avtorisation_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 

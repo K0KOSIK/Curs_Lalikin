@@ -206,6 +206,7 @@
             Controls.Add(dataGridView1);
             Controls.Add(panel1);
             Name = "Admin";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Admin";
             Load += Admin_Load;
             panel1.ResumeLayout(false);

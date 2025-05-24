@@ -168,7 +168,9 @@
             Controls.Add(Avtorisation_label2);
             Controls.Add(Avtorisation_label);
             Name = "Avtorisation";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Avtorisation";
+            FormClosing += Avtorisation_FormClosing;
             panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
