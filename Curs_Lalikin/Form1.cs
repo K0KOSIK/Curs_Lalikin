@@ -1,0 +1,85 @@
+using Curs_Lalikin.Models;
+using System.Diagnostics.Metrics;
+using System.IO;
+
+namespace Curs_Lalikin
+{
+    public partial class Avtorisation : Form
+    {
+        public Avtorisation()
+        {
+            InitializeComponent();
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            this.DoubleBuffered = true;
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+        }
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Ispr2525LalykinAdConstructionContext context = new();
+                User? user = context.Users
+                    .Where(user => user.Login == textBox1.Text && user.Password == textBox2.Text)
+                    .FirstOrDefault();
+                if (user.Role == "Администратор")
+                {
+                    MessageBox.Show(user.Role);
+                    //Avtoris_role.Text = user.Role;
+                    //await Task.Delay(1500);
+                    Admin form2 = new Admin(this);
+                    form2.Show();
+                }
+                if (user.Role == "Пользователь")
+                {
+                    MessageBox.Show(user.Role);
+                    //Avtoris_role.Text = user.Role;
+                    //await Task.Delay(1500);
+                    Users form3 = new Users(this);
+                    form3.Show();
+                }
+                this.Hide();
+                textBox1.Text = "";
+                textBox2.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Неправильный логин или пароль:");
+                textBox1.Text = "";
+                textBox2.Text = "";
+            }
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void bt_max_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void bt_min_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+    }
+
+
+}
+
+    
+
