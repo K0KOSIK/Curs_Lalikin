@@ -65,10 +65,11 @@
             // bt_add
             // 
             bt_add.BackColor = Color.Tan;
+            bt_add.Dock = DockStyle.Bottom;
             bt_add.ForeColor = SystemColors.ActiveCaptionText;
-            bt_add.Location = new Point(10, 381);
+            bt_add.Location = new Point(0, 381);
             bt_add.Name = "bt_add";
-            bt_add.Size = new Size(146, 23);
+            bt_add.Size = new Size(165, 23);
             bt_add.TabIndex = 6;
             bt_add.Text = "ДОБАВИТЬ";
             bt_add.UseVisualStyleBackColor = false;
@@ -77,10 +78,11 @@
             // bt_edit
             // 
             bt_edit.BackColor = Color.Tan;
+            bt_edit.Dock = DockStyle.Bottom;
             bt_edit.ForeColor = SystemColors.ActiveCaptionText;
-            bt_edit.Location = new Point(10, 352);
+            bt_edit.Location = new Point(0, 404);
             bt_edit.Name = "bt_edit";
-            bt_edit.Size = new Size(146, 23);
+            bt_edit.Size = new Size(165, 23);
             bt_edit.TabIndex = 5;
             bt_edit.Text = "ИЗМЕНИТЬ";
             bt_edit.UseVisualStyleBackColor = false;
@@ -89,10 +91,11 @@
             // bt_delete
             // 
             bt_delete.BackColor = Color.Tan;
+            bt_delete.Dock = DockStyle.Bottom;
             bt_delete.ForeColor = SystemColors.ActiveCaptionText;
-            bt_delete.Location = new Point(10, 323);
+            bt_delete.Location = new Point(0, 427);
             bt_delete.Name = "bt_delete";
-            bt_delete.Size = new Size(146, 23);
+            bt_delete.Size = new Size(165, 23);
             bt_delete.TabIndex = 4;
             bt_delete.Text = "УДАЛИТЬ";
             bt_delete.UseVisualStyleBackColor = false;
@@ -101,10 +104,11 @@
             // Categories
             // 
             Categories.BackColor = Color.Tan;
+            Categories.Dock = DockStyle.Top;
             Categories.ForeColor = SystemColors.ActiveCaptionText;
-            Categories.Location = new Point(3, 99);
+            Categories.Location = new Point(0, 69);
             Categories.Name = "Categories";
-            Categories.Size = new Size(153, 23);
+            Categories.Size = new Size(165, 23);
             Categories.TabIndex = 3;
             Categories.Text = "Categories";
             Categories.UseVisualStyleBackColor = false;
@@ -113,10 +117,11 @@
             // project_materials
             // 
             project_materials.BackColor = Color.Tan;
+            project_materials.Dock = DockStyle.Top;
             project_materials.ForeColor = SystemColors.ActiveCaptionText;
-            project_materials.Location = new Point(3, 70);
+            project_materials.Location = new Point(0, 46);
             project_materials.Name = "project_materials";
-            project_materials.Size = new Size(153, 23);
+            project_materials.Size = new Size(165, 23);
             project_materials.TabIndex = 2;
             project_materials.Text = "project_materials";
             project_materials.UseVisualStyleBackColor = false;
@@ -125,10 +130,11 @@
             // materials
             // 
             materials.BackColor = Color.Tan;
+            materials.Dock = DockStyle.Top;
             materials.ForeColor = SystemColors.ActiveCaptionText;
-            materials.Location = new Point(3, 41);
+            materials.Location = new Point(0, 23);
             materials.Name = "materials";
-            materials.Size = new Size(153, 23);
+            materials.Size = new Size(165, 23);
             materials.TabIndex = 1;
             materials.Text = "materials";
             materials.UseVisualStyleBackColor = false;
@@ -137,10 +143,11 @@
             // project
             // 
             project.BackColor = Color.Tan;
+            project.Dock = DockStyle.Top;
             project.ForeColor = SystemColors.ActiveCaptionText;
-            project.Location = new Point(3, 12);
+            project.Location = new Point(0, 0);
             project.Name = "project";
-            project.Size = new Size(153, 23);
+            project.Size = new Size(165, 23);
             project.TabIndex = 0;
             project.Text = "project";
             project.UseVisualStyleBackColor = false;
@@ -148,6 +155,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.Tan;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
@@ -168,6 +176,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(635, 35);
             panel2.TabIndex = 2;
+            panel2.Paint += panel2_Paint;
             panel2.MouseDown += panelTop_MouseDown;
             // 
             // bt_min

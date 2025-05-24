@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -33,6 +34,7 @@ namespace Curs_Lalikin
             Ispr2525LalykinAdConstructionContext context = new();
             dataGridView1.DataSource = context.Projects.ToList();
             activeEntity = ActiveEntity.Projects;
+            dataGridView1.Columns[6].Visible = false;
         }
 
         private void project_Click(object sender, EventArgs e)
@@ -40,13 +42,15 @@ namespace Curs_Lalikin
             Ispr2525LalykinAdConstructionContext context = new();
             dataGridView1.DataSource = context.Projects.ToList();
             activeEntity = ActiveEntity.Projects;
+            dataGridView1.Columns[6].Visible = false;
         }
         private void materials_Click(object sender, EventArgs e)
         {
             Ispr2525LalykinAdConstructionContext context = new();
             dataGridView1.DataSource = context.Materials.ToList();
             activeEntity = ActiveEntity.Materials;
-
+            dataGridView1.Columns[5].Visible = false;
+            dataGridView1.Columns[6].Visible = false;
         }
 
         private void project_materials_Click(object sender, EventArgs e)
@@ -54,6 +58,8 @@ namespace Curs_Lalikin
             Ispr2525LalykinAdConstructionContext context = new();
             dataGridView1.DataSource = context.ProjectMaterials.ToList();
             activeEntity = ActiveEntity.ProjectMaterials;
+            dataGridView1.Columns[3].Visible = false;
+            dataGridView1.Columns[4].Visible = false;
         }
 
         private void Categories_Click(object sender, EventArgs e)
@@ -61,6 +67,7 @@ namespace Curs_Lalikin
             Ispr2525LalykinAdConstructionContext context = new();
             dataGridView1.DataSource = context.Categories.ToList();
             activeEntity = ActiveEntity.Categories;
+            dataGridView1.Columns[2].Visible = false;
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -79,10 +86,18 @@ namespace Curs_Lalikin
                 this.WindowState = FormWindowState.Normal;
             }
         }
-
         private void bt_min_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+        private void panelTop_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }
