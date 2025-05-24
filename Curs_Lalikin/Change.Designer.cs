@@ -46,7 +46,12 @@
             data_entry2 = new TextBox();
             input = new Label();
             data_entry = new TextBox();
+            panel2 = new Panel();
+            bt_min = new Button();
+            bt_max = new Button();
+            bt_exit = new Button();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // cancellation
@@ -102,8 +107,9 @@
             // 
             cmbStatus.Location = new Point(25, 323);
             cmbStatus.Name = "cmbStatus";
-            cmbStatus.Size = new Size(148, 23);
+            cmbStatus.Size = new Size(200, 23);
             cmbStatus.TabIndex = 14;
+            cmbStatus.SelectedItemChanged += cmbStatus_SelectedItemChanged;
             // 
             // dateTimePicker2
             // 
@@ -172,14 +178,14 @@
             // 
             data_entry6.Location = new Point(25, 323);
             data_entry6.Name = "data_entry6";
-            data_entry6.Size = new Size(148, 23);
+            data_entry6.Size = new Size(200, 23);
             data_entry6.TabIndex = 6;
             // 
             // data_entry5
             // 
             data_entry5.Location = new Point(25, 261);
             data_entry5.Name = "data_entry5";
-            data_entry5.Size = new Size(148, 23);
+            data_entry5.Size = new Size(200, 23);
             data_entry5.TabIndex = 5;
             // 
             // data_entry4
@@ -200,7 +206,7 @@
             // 
             data_entry2.Location = new Point(25, 89);
             data_entry2.Name = "data_entry2";
-            data_entry2.Size = new Size(148, 23);
+            data_entry2.Size = new Size(200, 23);
             data_entry2.TabIndex = 2;
             // 
             // input
@@ -216,8 +222,49 @@
             // 
             data_entry.Location = new Point(25, 35);
             data_entry.Name = "data_entry";
-            data_entry.Size = new Size(148, 23);
+            data_entry.Size = new Size(200, 23);
             data_entry.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.Peru;
+            panel2.Controls.Add(bt_min);
+            panel2.Controls.Add(bt_max);
+            panel2.Controls.Add(bt_exit);
+            panel2.Location = new Point(703, 2);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(96, 32);
+            panel2.TabIndex = 3;
+            // 
+            // bt_min
+            // 
+            bt_min.BackColor = Color.LightSeaGreen;
+            bt_min.Location = new Point(5, 3);
+            bt_min.Name = "bt_min";
+            bt_min.Size = new Size(25, 23);
+            bt_min.TabIndex = 11;
+            bt_min.UseVisualStyleBackColor = false;
+            bt_min.Click += bt_min_Click;
+            // 
+            // bt_max
+            // 
+            bt_max.BackColor = Color.Olive;
+            bt_max.Location = new Point(36, 3);
+            bt_max.Name = "bt_max";
+            bt_max.Size = new Size(25, 23);
+            bt_max.TabIndex = 10;
+            bt_max.UseVisualStyleBackColor = false;
+            bt_max.Click += bt_max_Click;
+            // 
+            // bt_exit
+            // 
+            bt_exit.BackColor = Color.SaddleBrown;
+            bt_exit.Location = new Point(67, 3);
+            bt_exit.Name = "bt_exit";
+            bt_exit.Size = new Size(27, 23);
+            bt_exit.TabIndex = 9;
+            bt_exit.UseVisualStyleBackColor = false;
+            bt_exit.Click += bt_exit_Click;
             // 
             // Change
             // 
@@ -225,6 +272,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Tan;
             ClientSize = new Size(800, 450);
+            Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(save);
             Controls.Add(cancellation);
@@ -236,6 +284,7 @@
             MouseDown += panel1_MouseDown;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -259,5 +308,9 @@
         private DateTimePicker dateTimePicker1;
         private DateTimePicker dateTimePicker2;
         private DomainUpDown cmbStatus;
+        private Panel panel2;
+        private Button bt_min;
+        private Button bt_max;
+        private Button bt_exit;
     }
 }

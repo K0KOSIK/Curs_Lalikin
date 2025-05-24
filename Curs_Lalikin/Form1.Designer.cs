@@ -120,14 +120,16 @@
             panel1.Controls.Add(bt_min);
             panel1.Controls.Add(bt_max);
             panel1.Controls.Add(bt_exit);
-            panel1.Location = new Point(-2, 2);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(799, 24);
+            panel1.Size = new Size(800, 24);
             panel1.TabIndex = 7;
             panel1.MouseDown += panelTop_MouseDown;
             // 
             // bt_min
             // 
+            bt_min.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_min.BackColor = Color.LightSeaGreen;
             bt_min.Location = new Point(704, 0);
             bt_min.Name = "bt_min";
@@ -138,6 +140,7 @@
             // 
             // bt_max
             // 
+            bt_max.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_max.BackColor = Color.Olive;
             bt_max.Location = new Point(738, 0);
             bt_max.Name = "bt_max";
@@ -148,6 +151,7 @@
             // 
             // bt_exit
             // 
+            bt_exit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_exit.BackColor = Color.SaddleBrown;
             bt_exit.Location = new Point(769, 0);
             bt_exit.Name = "bt_exit";

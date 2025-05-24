@@ -278,7 +278,7 @@ namespace Curs_Lalikin
                         Ispr2525LalykinAdConstructionContext context4 = new();
                         context4.SaveChanges();
                         break;
-                   
+
                 }
 
             }
@@ -286,5 +286,31 @@ namespace Curs_Lalikin
             this.Close();
         }
 
+        private void cmbStatus_SelectedItemChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void bt_max_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void bt_min_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 }

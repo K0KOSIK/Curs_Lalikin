@@ -149,7 +149,7 @@
             // 
             dataGridView1.BackgroundColor = Color.Tan;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(164, 32);
+            dataGridView1.Location = new Point(164, 29);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(636, 415);
@@ -157,6 +157,7 @@
             // 
             // panel2
             // 
+            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             panel2.BackColor = Color.Peru;
             panel2.Controls.Add(bt_min);
             panel2.Controls.Add(bt_max);
