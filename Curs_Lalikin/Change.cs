@@ -1,9 +1,11 @@
 ﻿using Curs_Lalikin.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -46,6 +48,8 @@ namespace Curs_Lalikin
 
         public IsEdit isEdit { get; set; }
         public IsError isError;
+        private int materialId;
+
         public Change(ActiveEntity activeEntity, object entityData)
         {
             InitializeComponent();
@@ -153,114 +157,206 @@ namespace Curs_Lalikin
         }
         private void Change_Load(object sender, EventArgs e)
         {
+            if (x == ActiveEntity.ProjectMaterials && isEdit == IsEdit.Y)
+            {
+                using (var context = new Ispr2525LalykinAdConstructionContext())
+                {
+                    // Получаем pm из БД
+                    var pm = context.ProjectMaterials
+                        .FirstOrDefault(p => p.ProjectId == Convert.ToInt32(data_entry.Text) &&
+                        p.MaterialId == Convert.ToInt32(data_entry2.Text));
 
+                    if (pm != null)
+                    {
+                        data_entry.Text = pm.ProjectId.ToString();
+                        data_entry2.Text = pm.MaterialId.ToString();
+                        data_entry.Tag = pm.ProjectId;
+                        data_entry2.Tag = pm.MaterialId;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Запись не найдена!");
+                        this.Close();
+                    }
+                }
+            }
         }
 
         private void save_Click(object sender, EventArgs e)
         {
             int QuanityCol;
-            switch (x)
-            {
-                case ActiveEntity.Projects:
-                    Project Project = new();
-                    Project.ProjectId = Convert.ToInt32(data_entry.Text);
-                    Project.ProjectName = data_entry2.Text;
-                    Project.StartDate = DateOnly.FromDateTime(dateTimePicker1.Value);
-                    Project.EndDate = DateOnly.FromDateTime(dateTimePicker2.Value);
-                    Project.Budget = decimal.Parse(
-                    data_entry5.Text.Trim().Replace(',', '.'),
-                    System.Globalization.NumberStyles.Any,
-                    System.Globalization.CultureInfo.InvariantCulture
-                    );
-                    Project.Status = cmbStatus.Text;
-                    Ispr2525LalykinAdConstructionContext context = new();
-                    if (isEdit == IsEdit.Y)
-                        context.Update(Project);
-                    if (isEdit == IsEdit.N)
-                        context.Add(Project);
-                    context.SaveChanges();
-                    break;
-                case ActiveEntity.Materials:
-                    Material Material = new();
-                    Material.MaterialId = Convert.ToInt32(data_entry.Text);
-                    Material.MaterialName = data_entry2.Text;
-                    Material.UnitOfMeasure = data_entry3.Text;
-                    Material.UnitPrice = decimal.Parse(
-                    data_entry4.Text.Trim().Replace(',', '.'),
-                    System.Globalization.NumberStyles.Any,
-                    System.Globalization.CultureInfo.InvariantCulture
-                    );
-                    Ispr2525LalykinAdConstructionContext context5 = new();
-                    QuanityCol = context5.Categories.Count();
-                    if (Convert.ToInt32(data_entry5.Text) > QuanityCol || Convert.ToInt32(data_entry5.Text) < 0)
-                    {
-                        MessageBox.Show("CategoriesIdCategories не может быть меньше нуля или больше:" + QuanityCol);
-                        isError = IsError.Y;
-                        break;
-                    }
-                    else
-                        Material.CategoriesIdCategories = Convert.ToInt32(data_entry5.Text);
-                    Ispr2525LalykinAdConstructionContext context2 = new();
-                    if (isEdit == IsEdit.Y)
-                    {
-                        context2.Update(Material);
-                    }
-                    if (isEdit == IsEdit.N)
-                    {
-                        context2.Add(Material);
-                    }
-                    context2.SaveChanges();
-                    break;
-                case ActiveEntity.ProjectMaterials:
-                    ProjectMaterial ProjectMaterial = new();
-                    Ispr2525LalykinAdConstructionContext context6 = new();
-                    QuanityCol = context6.Projects.Count();
-                    if (Convert.ToInt32(data_entry.Text) > QuanityCol || Convert.ToInt32(data_entry.Text) < 0)
-                    {
-                        MessageBox.Show("ProjectId не может быть меньше нуля или больше:" + QuanityCol);
-                        isError = IsError.Y;
-                        break;
-                    }
-                    else
-                        ProjectMaterial.ProjectId = Convert.ToInt32(data_entry.Text);
-                    QuanityCol = context6.Materials.Count();
-                    if (Convert.ToInt32(data_entry2.Text) > QuanityCol || Convert.ToInt32(data_entry2.Text) < 0)
-                    {
-                        MessageBox.Show("MaterialId не может быть меньше нуля или больше:" + QuanityCol);
-                        isError = IsError.Y;
-                        break;
-                    }
-                    else
-                        ProjectMaterial.MaterialId = Convert.ToInt32(data_entry2.Text);
-                    ProjectMaterial.Quantity = decimal.Parse(
-                    data_entry3.Text.Trim().Replace(',', '.'),
-                    System.Globalization.NumberStyles.Any,
-                    System.Globalization.CultureInfo.InvariantCulture
-                    );
-                    Ispr2525LalykinAdConstructionContext context3 = new();
-                    if (isEdit == IsEdit.Y)
-                        context3.Update(ProjectMaterial);
-                    if (isEdit == IsEdit.N)
-                        context3.Add(ProjectMaterial);
-                    context3.SaveChanges();
-                    break;
-                case ActiveEntity.Categories:
-                    Category Categories = new();
-                    Categories.IdCategories = Convert.ToInt32(data_entry.Text);
-                    Categories.CategoriesName = data_entry2.Text;
-                    Ispr2525LalykinAdConstructionContext context4 = new();
-                    if (isEdit == IsEdit.Y)
-                        context4.Update(Categories);
-                    if (isEdit == IsEdit.N)
-                        context4.Add(Categories);
-                    context4.SaveChanges();
-                    break;
+            if (isError == IsError.Y) return;
 
-            }
-            if (isError == IsError.N)
+            try
             {
+                switch (x)
+                {
+                    case ActiveEntity.Projects:
+                        Project Project = new();
+                        Project.ProjectId = Convert.ToInt32(data_entry.Text);
+                        Project.ProjectName = data_entry2.Text;
+                        Project.StartDate = DateOnly.FromDateTime(dateTimePicker1.Value);
+                        Project.EndDate = DateOnly.FromDateTime(dateTimePicker2.Value);
+                        Project.Budget = decimal.Parse(
+                        data_entry5.Text.Trim().Replace(',', '.'),
+                        System.Globalization.NumberStyles.Any,
+                        System.Globalization.CultureInfo.InvariantCulture
+                        );
+                        Project.Status = cmbStatus.Text;
+                        Ispr2525LalykinAdConstructionContext context = new();
+                        if (isEdit == IsEdit.Y)
+                            context.Update(Project);
+                        if (isEdit == IsEdit.N)
+                            context.Add(Project);
+                        context.SaveChanges();
+                        break;
+                    case ActiveEntity.Materials:
+                        Material Material = new();
+                        Material.MaterialId = Convert.ToInt32(data_entry.Text);
+                        Material.MaterialName = data_entry2.Text;
+                        Material.UnitOfMeasure = data_entry3.Text;
+                        Material.UnitPrice = decimal.Parse(
+                        data_entry4.Text.Trim().Replace(',', '.'),
+                        System.Globalization.NumberStyles.Any,
+                        System.Globalization.CultureInfo.InvariantCulture
+                        );
+                        Ispr2525LalykinAdConstructionContext context5 = new();
+                        QuanityCol = context5.Categories.Count();
+                        if (Convert.ToInt32(data_entry5.Text) > QuanityCol || Convert.ToInt32(data_entry5.Text) < 0)
+                        {
+                            MessageBox.Show("CategoriesIdCategories не может быть меньше нуля или больше:" + QuanityCol);
+                            isError = IsError.Y;
+                            break;
+                        }
+                        else
+                            Material.CategoriesIdCategories = Convert.ToInt32(data_entry5.Text);
+                        Ispr2525LalykinAdConstructionContext context2 = new();
+                        if (isEdit == IsEdit.Y)
+                        {
+                            context2.Update(Material);
+                        }
+                        if (isEdit == IsEdit.N)
+                        {
+                            context2.Add(Material);
+                        }
+                        context2.SaveChanges();
+                        break;
+                    case ActiveEntity.Categories:
+                        Category Categories = new();
+                        Categories.IdCategories = Convert.ToInt32(data_entry.Text);
+                        Categories.CategoriesName = data_entry2.Text;
+                        Ispr2525LalykinAdConstructionContext context4 = new();
+                        if (isEdit == IsEdit.Y)
+                            context4.Update(Categories);
+                        if (isEdit == IsEdit.N)
+                            context4.Add(Categories);
+                        context4.SaveChanges();
+                        break;
+                    case ActiveEntity.ProjectMaterials:
+                        if (isEdit == IsEdit.N)
+                        {
+                            ProjectMaterial ProjectMaterial = new();
+                            Ispr2525LalykinAdConstructionContext context6 = new();
+                            QuanityCol = context6.Projects.Count();
+                            if (Convert.ToInt32(data_entry.Text) > QuanityCol || Convert.ToInt32(data_entry.Text) < 0)
+                            {
+                                MessageBox.Show("ProjectId не может быть меньше нуля или больше:" + QuanityCol);
+                                isError = IsError.Y;
+                                break;
+                            }
+                            else
+                                ProjectMaterial.ProjectId = Convert.ToInt32(data_entry.Text);
+                            QuanityCol = context6.Materials.Count();
+                            if (Convert.ToInt32(data_entry2.Text) > QuanityCol || Convert.ToInt32(data_entry2.Text) < 0)
+                            {
+                                MessageBox.Show("MaterialId не может быть меньше нуля или больше:" + QuanityCol);
+                                isError = IsError.Y;
+                                break;
+                            }
+                            else
+                                ProjectMaterial.MaterialId = Convert.ToInt32(data_entry2.Text);
+                            ProjectMaterial.Quantity = decimal.Parse(
+                            data_entry3.Text.Trim().Replace(',', '.'),
+                            System.Globalization.NumberStyles.Any,
+                            System.Globalization.CultureInfo.InvariantCulture
+                            );
+                            Ispr2525LalykinAdConstructionContext context3 = new();
+                            if (isEdit == IsEdit.Y)
+                                context3.Update(ProjectMaterial);
+                            if (isEdit == IsEdit.N)
+                                context3.Add(ProjectMaterial);
+                            context3.SaveChanges();
+                        }
+                        if (isEdit == IsEdit.Y)
+                        {
+                            using (var context6 = new Ispr2525LalykinAdConstructionContext())
+                            {
+                                int oldProjectId = (data_entry.Tag as int?) ?? 0;
+                                int oldMaterialId = (data_entry2.Tag as int?) ?? 0;
+                                int projectId = Convert.ToInt32(data_entry.Text);
+                                int materialIdNew = Convert.ToInt32(data_entry2.Text);
+                                decimal quantity = decimal.Parse(data_entry3.Text.Trim().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture);
+
+                                // Проверка существования проекта и материала
+                                if (!context6.Projects.Any(p => p.ProjectId == projectId) ||
+                                    !context6.Materials.Any(m => m.MaterialId == materialIdNew))
+                                {
+                                    MessageBox.Show("Проект или материал не найден!");
+                                    return;
+                                }
+
+                                // Проверка на дубликат новой записи
+                                if (context6.ProjectMaterials.Any(p => p.ProjectId == projectId && p.MaterialId == materialIdNew))
+                                {
+                                    MessageBox.Show("Такая связь уже существует!");
+                                    return;
+                                }
+
+                                // Удаление старой записи
+                                var oldPm = context6.ProjectMaterials
+                                    .FirstOrDefault(p => p.ProjectId == oldProjectId && p.MaterialId == oldMaterialId);
+
+                                if (oldPm == null)
+                                {
+                                    context6.ProjectMaterials.Add(new ProjectMaterial
+                                    {
+                                        ProjectId = projectId,
+                                        MaterialId = materialIdNew,
+                                        Quantity = quantity
+                                    });
+
+                                    context6.SaveChanges();
+                                    break;
+                                }
+
+                                context6.ProjectMaterials.Remove(oldPm);
+
+                                // Добавление новой записи
+                                context6.ProjectMaterials.Add(new ProjectMaterial
+                                {
+                                    ProjectId = projectId,
+                                    MaterialId = materialIdNew,
+                                    Quantity = quantity
+                                });
+
+                                context6.SaveChanges();
+                            }
+                        }
+                        break;
+
+                }
                 this.DialogResult = DialogResult.OK;
                 this.Close();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                MessageBox.Show("Ошибка: данные были изменены другим пользователем. Обновите данные.");
+                ExceptionToFile.SaveExceptionToDesktop(ex);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}");
+                ExceptionToFile.SaveExceptionToDesktop(ex);
             }
         }
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -311,7 +407,7 @@ namespace Curs_Lalikin
 
         private void bt_exit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            cancellation.PerformClick();
         }
 
         private void bt_max_Click(object sender, EventArgs e)

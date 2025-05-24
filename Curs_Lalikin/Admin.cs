@@ -128,7 +128,6 @@ namespace Curs_Lalikin
             {
                 dataGridView1.DataSource = null;
             }
-            //dataGridView1.DataSource = context.ProjectMaterials.ToList();
             Ispr2525LalykinAdConstructionContext context2 = new();
             var ProjectMaterials = context2.ProjectMaterials
                 .OrderBy(x => x.ProjectId)
@@ -137,8 +136,6 @@ namespace Curs_Lalikin
                     x.ProjectId,
                     x.MaterialId,
                     x.Quantity,
-
-
                 });
 
             if (dataGridView1.DataSource != null)
@@ -408,7 +405,6 @@ namespace Curs_Lalikin
                                 pm.Quantity
                             }).ToList();
                         dataGridView1.DataSource = data;
-                        activeEntity = ActiveEntity.ProjectMaterials;
                         dataGridView1.Columns[0].Visible = false;
                         dataGridView1.Columns[1].Visible = false;
                         dataGridView1.Refresh();
