@@ -60,18 +60,23 @@ namespace Curs_Lalikin
 
         private void project_materials_Click(object sender, EventArgs e)
         {
+            //dataGridView1.DataSource = context.ProjectMaterials.ToList();
             Ispr2525LalykinAdConstructionContext context = new();
             var data = context.ProjectMaterials
                 .Include(pm => pm.Project)
                 .Include(pm => pm.Material)
                 .Select(pm => new
                 {
+                    project_id = pm.ProjectId,
+                    material_id = pm.MaterialId,
                     ProjectName = pm.Project.ProjectName,
                     MaterialName = pm.Material.MaterialName,
                     pm.Quantity
                 }).ToList();
             dataGridView1.DataSource = data;
             activeEntity = ActiveEntity.ProjectMaterials;
+            dataGridView1.Columns[0].Visible = false;
+            dataGridView1.Columns[1].Visible = false;
         }
 
         private void Categories_Click(object sender, EventArgs e)
@@ -123,6 +128,7 @@ namespace Curs_Lalikin
             {
                 dataGridView1.DataSource = null;
             }
+            //dataGridView1.DataSource = context.ProjectMaterials.ToList();
             Ispr2525LalykinAdConstructionContext context2 = new();
             var ProjectMaterials = context2.ProjectMaterials
                 .OrderBy(x => x.ProjectId)
@@ -252,9 +258,22 @@ namespace Curs_Lalikin
                             ProjectMaterials.ExecuteDelete();
                             contex2.SaveChanges();
                             UpdateInfo();
-                            dataGridView1.DataSource = contex2.ProjectMaterials.ToList();
-                            dataGridView1.Columns[3].Visible = false;
-                            dataGridView1.Columns[4].Visible = false;
+                            Ispr2525LalykinAdConstructionContext context = new();
+                            var data = context.ProjectMaterials
+                                .Include(pm => pm.Project)
+                                .Include(pm => pm.Material)
+                                .Select(pm => new
+                                {
+                                    project_id = pm.ProjectId,
+                                    material_id = pm.MaterialId,
+                                    ProjectName = pm.Project.ProjectName,
+                                    MaterialName = pm.Material.MaterialName,
+                                    pm.Quantity
+                                }).ToList();
+                            dataGridView1.DataSource = data;
+                            activeEntity = ActiveEntity.ProjectMaterials;
+                            dataGridView1.Columns[0].Visible = false;
+                            dataGridView1.Columns[1].Visible = false;
                         }
                         catch (Exception ex)
                         {
@@ -369,15 +388,29 @@ namespace Curs_Lalikin
                     {
                         ProjectId = (int)dataGridView1.SelectedRows[0].Cells[0].Value,
                         MaterialId = (int)dataGridView1.SelectedRows[0].Cells[1].Value,
-                        Quantity = (decimal)dataGridView1.SelectedRows[0].Cells[2].Value,
+                        Quantity = (decimal)dataGridView1.SelectedRows[0].Cells[4].Value,
                     };
                     this.Hide();
                     var editing = new Change(ActiveEntity.ProjectMaterials, ProjectMaterials);
                     editing.isEdit = isEdit;
                     if (editing.ShowDialog() == DialogResult.OK)
                     {
-                        Ispr2525LalykinAdConstructionContext context2 = new();
-                        dataGridView1.DataSource = context2.ProjectMaterials.ToList();
+                        Ispr2525LalykinAdConstructionContext context = new();
+                        var data = context.ProjectMaterials
+                            .Include(pm => pm.Project)
+                            .Include(pm => pm.Material)
+                            .Select(pm => new
+                            {
+                                project_id = pm.ProjectId,
+                                material_id = pm.MaterialId,
+                                ProjectName = pm.Project.ProjectName,
+                                MaterialName = pm.Material.MaterialName,
+                                pm.Quantity
+                            }).ToList();
+                        dataGridView1.DataSource = data;
+                        activeEntity = ActiveEntity.ProjectMaterials;
+                        dataGridView1.Columns[0].Visible = false;
+                        dataGridView1.Columns[1].Visible = false;
                         dataGridView1.Refresh();
                         this.Show();
                     }
@@ -490,7 +523,20 @@ namespace Curs_Lalikin
                     if (editing.ShowDialog() == DialogResult.OK)
                     {
                         Ispr2525LalykinAdConstructionContext context2 = new();
-                        dataGridView1.DataSource = context2.ProjectMaterials.ToList();
+                        var data = context2.ProjectMaterials
+                            .Include(pm => pm.Project)
+                            .Include(pm => pm.Material)
+                            .Select(pm => new
+                            {
+                                project_id = pm.ProjectId,
+                                material_id = pm.MaterialId,
+                                ProjectName = pm.Project.ProjectName,
+                                MaterialName = pm.Material.MaterialName,
+                                pm.Quantity
+                            }).ToList();
+                        dataGridView1.DataSource = data;
+                        dataGridView1.Columns[0].Visible = false;
+                        dataGridView1.Columns[1].Visible = false;
                         dataGridView1.Refresh();
                         this.Show();
                     }
