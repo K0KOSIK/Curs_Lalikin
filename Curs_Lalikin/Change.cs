@@ -56,8 +56,58 @@ namespace Curs_Lalikin
             x = activeEntity;
             ConfigureForm(entityData);
             isError = IsError.N;
+            foreach (Control control in panel1.Controls)
+            {
+                if (x == ActiveEntity.Projects) 
+                {
+                    if (control is System.Windows.Forms.TextBox textBox && (textBox.Name == "data_entry" || textBox.Name == "data_entry5"))
+                    {
+                        textBox.KeyPress += TextBox_KeyPress;
+                        textBox.KeyDown += TextBox_KeyDown;
+                    }
+                }
+                if (x == ActiveEntity.Materials)
+                {
+                    if (control is System.Windows.Forms.TextBox textBox && (textBox.Name == "data_entry" || textBox.Name == "data_entry4" ||
+                        textBox.Name == "data_entry5"))
+                    {
+                        textBox.KeyPress += TextBox_KeyPress;
+                        textBox.KeyDown += TextBox_KeyDown;
+                    }
+                }
+                if (x == ActiveEntity.ProjectMaterials)
+                {
+                    if (control is System.Windows.Forms.TextBox textBox && (textBox.Name == "data_entry" || textBox.Name == "data_entry2" ||
+                        textBox.Name == "data_entry3"))
+                    {
+                        textBox.KeyPress += TextBox_KeyPress;
+                        textBox.KeyDown += TextBox_KeyDown;
+                    }
+                }
+                if (x == ActiveEntity.Categories)
+                {
+                    if (control is System.Windows.Forms.TextBox textBox && textBox.Name == "data_entry")
+                    {
+                        textBox.KeyPress += TextBox_KeyPress;
+                        textBox.KeyDown += TextBox_KeyDown;
+                    }
+                }
+            }
         }
-
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                e.SuppressKeyPress = true;
+            }
+        }
         private void ConfigureForm(object entityData)
         {
             switch (x)
